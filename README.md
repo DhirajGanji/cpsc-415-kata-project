@@ -2,41 +2,39 @@
 # Machine Learning to Predict Diseases from Symptoms
 
 ## Project Statement: 
-The project will be a Machine Learning model that will be trained on a dataset containing information about different symptoms that people have, and what possible ailments and diseases said symptoms could be signs of. 
+The project is a Machine Learning model that is trained on a dataset containing information about different symptoms that people have, and what possible ailments and diseases said symptoms could be signs of. The model is interacted with through a web application, accessed on a browser.
 
 ## Team Members: 
 Dhiraj Ganji
 
-## Estimated Modules:
-  1.Nginx for the frontend web application.
-  1.Python code that will contain the model used to predict ailments.
-  1.Database (exact implementation TBA) that contains disease, symptom, and recommendation information.
+## Modules (each of these is a separate pod):
+  1. Frontend web application module that uses Flask to render and serve all frontend templates.
+  2. The ML model (scikit-learn's RandomForestClassifier).
+  3. Pickle database files that contain disease, symptom, and recommendation information.
 
-## Estimated Languages and Frameworks: 
-1. HTML, CSS and JS to make the Nginx frontend presentable.
+## Languages and Frameworks: 
+1. HTML, CSS and JS to make the frontend presentable.
 2. Python to manage the backend- using model, talking to Database, etc.
-3. Python libraries (estimated)
+3. Python libraries used-
     1. Pandas to manipulate data.
     2. Numpy to perform calculations.
-    3. Scikit-learn, Pytorch, etc. for ML models.
-4. Database implementation TBA, will initially use CSV files and do CRUD operations using Pandas on Python.
+    3. Scikit-learn for ML model.
+    4. Pickle to store and read data.
+    5. Flask to run the web application and serve pages.
+4. Database implementation- Pickle is used to store serialized Python objects (list, dict, etc.) for easy and quick access to data.
 
 ## Instructions to run application 
-Kubectl, and by extension, Kubernetes, is required to run the application. You may download it here- https://kubernetes.io/releases/download/, or download Docker for Desktop here- https://www.docker.com/products/docker-desktop/. Once everything is installed, the steps to run the application depend on your OS.
+Kubectl, and by extension, Kubernetes, is required to run the application. You may download it [here](https://kubernetes.io/releases/download/), or download Docker for Desktop [here](https://www.docker.com/products/docker-desktop/). Once everything is installed, the steps to run the application depend on your OS.
 ### Linux users- 
   1. Download all the files to a folder. 
-  2. While in the root folder (the one with the "k8s-prereqs" and "k8s-files" folders), enter this command into your terminal- 1.
-  ```
-    ./linux-run-all.sh
-  ```
-  3. You're all set! You can access the application on your web browser on port 30000. Please keep in mind, it might take a minute or two to start up. 
-  4. When you want to close the application and delete the Kubernetes artifacts, use this command- 
-  ```
-    ./linux-delete-all.sh
-  ```
+  2. While in the root folder (the one with the "k8s-prereqs" and "k8s-files" folders), enter this command into your terminal-
+      ./linux-run-all.sh
+  3. You're all set! You can access the application on your web browser at http://localhost:30000. Please keep in mind, it might take a few minutes to start up. 
+  4. When you want to close the application and delete the Kubernetes artifacts, use this command-
+      ./linux-delete-all.sh
 
 ### Windows users- 
   1. Download all the files to a folder. 
-  2. Double-click the "windows-run-all.bat" file. 
-  3. You're all set! You can access the application on your web browser on port 30000. Please keep in mind, it might take a minute or two to start up. 
-  4. When you want to close the application and delete the Kubernetes artifacts, open the "windows-delete-all.bat" file. 
+  2. While in the root folder (the one with the "k8s-prereqs" and "k8s-files" folders), double-click the "windows-run-all.bat" file. 
+  3. You're all set! You can access the application on your web browser at http://localhost:30000. Please keep in mind, it might take a few minutes to start up. 
+  4. When you want to close the application and delete the Kubernetes artifacts, double-click the "windows-delete-all.bat" file. 
