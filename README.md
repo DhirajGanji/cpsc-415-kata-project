@@ -29,12 +29,12 @@ Kubectl, and by extension, Kubernetes, is required to run the application. You m
   1. Download all the files to a folder. 
   2. While in the root folder (the one with the "k8s-prereqs" and "k8s-files" folders), enter this command into your terminal-
   
-    ./linux-run-all.sh
+      ./linux-run-all.sh
      
   3. You're all set! You can access the application on your web browser at http://localhost:30000. Please keep in mind, it might take a few minutes to start up. 
   4. When you want to close the application and delete the Kubernetes artifacts, use this command-
       
-    ./linux-delete-all.sh
+      ./linux-delete-all.sh
 
 ### Windows users- 
   1. Download all the files to a folder. 
