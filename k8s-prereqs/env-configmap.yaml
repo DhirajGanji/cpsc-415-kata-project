@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: env-configmap
+  namespace: disease-app
+data:
+  PREDICT_DISEASE: http://prediction-service:5001/predict_disease
+  PARSE_DISEASE: http://result-service:5002/disease_parse
+  WRITE_DISEASE: http://home-service:5000/disease_information

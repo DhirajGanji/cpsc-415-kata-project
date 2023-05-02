@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Symptom Selection</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
+<style>
+body,h1,h2,h3,h4,h5,h6,p {font-family: "Lato", sans-serif;}
+body, html {
+  height: 100%;
+  color: #777;
+  line-height: 1.8;
+}
+
+
+/* First image (Logo. Full height) */
+.bgimg-1 {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('static/images/pic1.jpg');
+  min-height: 100%;
+}
+
+.w3-wide {letter-spacing: 10px;}
+.w3-hover-opacity {cursor: pointer;}
+
+.float-container {
+    border: 3px solid #fff;
+    padding: 20px;
+    padding-bottom: 50px;
+}
+
+.float-child-left {
+    border: 1px solid black;
+    float: left;
+    padding: 10px;
+    width: 45%;
+    height: 300px;
+    overflow-y: scroll;
+}
+
+.float-child-center {
+    padding: 50px;
+    width: 10%;
+    height: 300px;
+    display: inline-block;
+}
+
+.float-child-right {
+    border: 1px solid black;
+    float: right;
+    padding: 10px;
+    width: 45%;
+    height: 300px;
+    overflow-y: hidden;
+}
+
+.selected {
+    background-color: lightblue;
+}
+
+.footer {
+    opacity:0.5;
+    padding: 50px;
+    width: 100%;
+    height : 200px;
+    background-color: lightblue;
+    display: inline-block;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.footer:hover{
+  opacity:1.0;
+}
+
+/* Turn off parallax scrolling for tablets and phones */
+@media only screen and (max-device-width: 1600px) {
+  .bgimg-1{
+    background-attachment: scroll;
+    min-height: 400px;
+  }
+}
+</style>
+</head>
+<body>
+<!-- First Parallax Image with Logo Text -->
+<div class="bgimg-1 w3-display-container w3-opacity-min" id="home">
+  <div class="w3-display-middle" style="white-space:nowrap;">
+    <span class="w3-padding-large w3-black w3-xlarge w3-wide w3-animate-opacity">Disease Prediction</span>
+  </div>
+</div>
+
+<!-- Float Container (Disease select menus) -->
+<h1><center>Please select the symptoms you are feeling.</center></h1>
+<div class="float-container">
+		<div class="float-child-left" id="left-box">
+			<h2>Symptom List</h2>
+			<ul>
+		        {% for symptom in symptom_list %}
+		            <li>{{ symptom }}</li>
+		        {% endfor %}
+			</ul>
+		</div>
+		<div class="float-child-right" id="right-box">
+			<h2>Selected Symptoms</h2>
+			<ul></ul>
+		</div>
+        <div class="float-child-center">
+            <center>
+                <button id="submit-btn">Submit</button>
+            </center>
+        </div>
+</div>
+<script>
+	// get references to HTML elements
+	const leftBox = document.getElementById('left-box');
+	const rightBox = document.getElementById('right-box');
+	const submitBtn = document.getElementById('submit-btn');
+
+	// add click event listener to left box items
+	leftBox.querySelectorAll('li').forEach(li => {
+		li.addEventListener('click', () => {
+			if (rightBox.querySelectorAll('li').length < 17 || li.classList.contains('selected')) {
+				// add selected class to clicked item
+				li.classList.toggle('selected');
+				// move item to right box if selected
+				if (li.classList.contains('selected')) {
+					rightBox.querySelector('ul').appendChild(li);
+				} else {
+					leftBox.querySelector('ul').appendChild(li);
+				}
+			} else {
+				alert('You can only select up to 17 symptoms.');
+			}
+		});
+	});
+
+	const XHR = new XMLHttpRequest();
+	XHR.open("POST", "disease_write");
+	XHR.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
+	// add click event listener to submit button
+	submitBtn.addEventListener('click', () => {
+		// create JSON object from selected items
+		const selectedItems = Array.from(rightBox.querySelectorAll('li')).map(li => li.textContent);
+		const jsonData = JSON.stringify(selectedItems);
+		// log JSON object to console (replace with your own code)
+		XHR.send(jsonData);
+		XHR.addEventListener('load', (event) => {
+    		window.location.href = '/display_prediction';
+  		});
+	});
+</script>
+
+<!-- Footer -->
+<div class="footer">
+  <center>
+  <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+  <a target="_blank" href="https://icons8.com/icon/Zy2R4v8bk9bb/health">Favicon</a> by <a target="_blank" href="https://icons8.com">Icons8</a>
+  </center>
+</div>
+ 
+<script>
+// Change style of navbar on scroll
+window.onscroll = function() {myFunction()};
+function myFunction() {
+    var navbar = document.getElementById("myNavbar");
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        navbar.className = "w3-bar" + " w3-card" + " w3-animate-top" + " w3-white";
+    } else {
+        navbar.className = navbar.className.replace(" w3-card w3-animate-top w3-white", "");
+    }
+}
+
+// Used to toggle the menu on small screens when clicking on the menu button
+function toggleFunction() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else {
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+</script>
+
+</body>
+</html>
