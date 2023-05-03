@@ -32,6 +32,7 @@ Kubectl, and by extension, Kubernetes, is required to run the application. You m
       chmod u+x linux-run-all.sh linux-delete-all.sh
   ```
   This command allows the shell files to execute the commands written in them, which you will need to run the program.
+  
   4. While in the root folder (the one with the "k8s-prereqs" and "k8s-files" folders), enter this command into your terminal-
   ```
       ./linux-run-all.sh
