@@ -41,3 +41,5 @@ Kubectl, and by extension, Kubernetes, is required to run the application. You m
   2. While in the root folder (the one with the "k8s-prereqs" and "k8s-files" folders), double-click the "windows-run-all.bat" file. 
   3. You're all set! You can access the application on your web browser at http://localhost:30000. Please keep in mind, it might take a few minutes to start up. 
   4. When you want to close the application and delete the Kubernetes artifacts, double-click the "windows-delete-all.bat" file. 
+
+![Architecture Diagram](architecture_diagram.jpg)
