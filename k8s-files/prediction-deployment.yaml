@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: prediction
-          image: blackmesa12/prediction:alpha
+          image: blackmesa12/prediction:final
           envFrom:
             - configMapRef:
                 name: env-configmap
@@ -29,7 +29,6 @@ metadata:
   name: prediction-service
   namespace: disease-app
 spec:
-  type: NodePort
   selector:
     app: prediction-app
   ports:

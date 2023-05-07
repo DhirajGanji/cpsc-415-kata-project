@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: blackmesa12/frontend:alpha
+          image: blackmesa12/frontend:final
           envFrom:
             - configMapRef:
                 name: env-configmap
@@ -33,7 +33,7 @@ spec:
   selector:
     app: home-app
   ports:
-    - protocol: TCP
-      port: 5000
-      targetPort: 5000
-      nodePort: 30000
+  - protocol: TCP
+    port: 5000
+    targetPort: 5000
+    nodePort: 30000

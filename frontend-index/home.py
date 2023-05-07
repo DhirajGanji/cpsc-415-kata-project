@@ -41,9 +41,6 @@ def display():
     disease = pickle.load(open('disease.pkl', 'rb'))
     information = pickle.load(open('information.pkl', 'rb'))
     recommendation = pickle.load(open('recommendation.pkl', 'rb'))
-    os.remove("disease.pkl")
-    os.remove("information.pkl")
-    os.remove("recommendation.pkl")
     return render_template('diseases.html', disease_preded=disease,\
                            disease_info=information, disease_recs= recommendation)
 

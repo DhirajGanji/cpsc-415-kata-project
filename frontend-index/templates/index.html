@@ -145,6 +145,17 @@ body, html {
 	const XHR = new XMLHttpRequest();
 	XHR.open("POST", "disease_write");
 	XHR.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
+    function resolveAfter2Seconds() {
+        return new Promise(resolve => {
+          setTimeout(() => {
+            resolve('resolved');
+          }, 1000);
+        });
+    }
+    async function redirect() {
+        const result = await resolveAfter2Seconds();
+        window.location.href = '/display_prediction';
+    }
 	// add click event listener to submit button
 	submitBtn.addEventListener('click', () => {
 		// create JSON object from selected items
@@ -152,9 +163,9 @@ body, html {
 		const jsonData = JSON.stringify(selectedItems);
 		// log JSON object to console (replace with your own code)
 		XHR.send(jsonData);
-		XHR.addEventListener('load', (event) => {
-    		window.location.href = '/display_prediction';
-  		});
+        XHR.addEventListener('load', (event) => {
+            redirect();
+        }); 
 	});
 </script>
 
